@@ -1,0 +1,390 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Manrope:wght@200..800&display=swap');
+
+:root {
+    --color-green: #44FFA1;
+    --color-purple-900:#24053E;
+    --color-purple-500:#584D62;
+    --color-purple-100:#FCF8FF;
+    --color-white: #fff;
+
+    --space-100: 8px;
+    --space-500: 40px;
+    --space-700: 56px;
+    --space-1000: 80px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    background: var(--color-white);
+    color: var(--color-purple-900);
+    font-family: 'Manrope', serif;
+    overflow-x: hidden;
+}
+
+.hero {
+    background: var(--color-purple-900);
+    color: var(--color-white);
+    height: 37rem;
+    position: relative;
+    overflow: visible; /* <-- important: let purple go down */
+    z-index: 1;
+}
+
+/* purple bulge down */
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -120px;              /* goes BELOW hero */
+    transform: translateX(-50%);
+
+    width: 140%;
+    height: 240px;
+
+    background: var(--color-purple-900);  /* <-- purple, not white */
+    border-radius: 50%;
+}
+
+.container {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.hero__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2.5rem;
+}
+
+.hero__logo {
+    height: 1.5rem;
+    width: auto;
+    display: block;
+}
+
+.hero__link {
+    text-decoration: none;
+    font-size: 18px;
+    color: inherit;
+    border-bottom: 2px solid var(--color-green);
+    padding-bottom: 0.25rem;
+}
+
+.hero__content {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.hero__title {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    font-weight: 600;
+    max-width: 12ch;
+    margin: 0 auto 2rem;
+    line-height: 1.1;
+}
+
+.hero__underline {
+    border-bottom: 2px solid var(--color-green);
+}
+
+.hero__btn {
+    background: var(--color-green);
+    color: var(--color-purple-900);
+    padding: 16px 32px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.hero__btn:hover {
+    background-color: var(--color-purple-900);
+    color: var(--color-green);
+    border-color: var(--color-green);
+}
+
+.hero__visual {
+    position: relative;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.hero__phone {
+    width: min(600px, 90%);
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    transform: translateY(80px);
+}
+
+.hero__pattern {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero__pattern--left {
+    left: -35%;
+    top: -80%;
+    transform: translateY(0%);
+}
+
+.hero__pattern--right {
+    right: -31%;
+    top: -45%;
+    transform: translateY(0%);
+}
+
+.features {
+    background: var(--color-purple-100);
+    position: relative;
+    padding: clamp(14rem, 20vw, 20rem) 0 7.5rem;
+}
+.features::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -120px;              /* goes BELOW hero */
+    transform: translateX(-50%);
+
+    width: 140%;
+    height: 240px;
+
+    background: var(--color-purple-100);  /* <-- purple, not white */
+    border-radius: 50%;
+}
+
+.feature__list {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.feature {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.feature__number {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--color-purple-900);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    
+}
+
+.feature__title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.feature__text {
+    line-height: 1.8;
+}
+
+.cta {
+    padding: 160px 0 120px;
+    background-color: var(--color-white);
+}
+
+.cta__wrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.cta__image {
+   z-index: 1; 
+   position: relative;
+}
+
+.cta__imgfounder {
+    width: 500px;
+    height: auto;
+    display: block;
+}
+
+.cta__card {
+    background-color: var(--color-purple-900);
+    color: var(--color-white);
+    padding: 32px;
+    width: 100%;
+    max-width: 550px;
+    
+   transform: translate(-4rem, 15rem);
+    z-index: 2;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.cta__card button {
+    margin-top:0;
+}
+
+.cta__card h2 {
+    font-weight: 500;
+    font-size: 30px;
+    font-family: 'Fraunces';
+}
+
+.cta__card h2,
+.cta__card p {
+    margin: 0;                 /* removes default big margins */
+}
+
+.cta__card p {
+  line-height: 1.6;          /* was 1.8 (tightens the paragraph) */
+}
+
+.card__image {
+    display: flex;
+    position: absolute;
+    right: 32px;
+    bottom: -60px;
+    pointer-events: none;
+}
+
+.foot {
+    padding: 80px 0 60px;
+}
+
+.footer__logo, .footer__social  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    height: 70px;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 2rem;
+    }
+
+    .hero__phone {
+        transform: translateY(60px);
+    }
+
+    .hero__pattern--right {
+        right: -18%;
+        top: -45%;
+        transform: translateY(0%);
+    }
+
+    .feature__list {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .feature {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 2rem;
+        row-gap: 0.5rem;
+        text-align: left;
+    }
+
+   .feature__number {
+        grid-row: span 2;
+    }
+
+    .cta {
+        padding: 0;
+    }
+
+    .cta__imgfounder {
+        width: 300px;
+    }
+}
+
+@media (max-width: 375px) {
+    .hero {
+        height: 32rem;
+    }
+
+    /* .hero__btn {
+        position: relative;
+        z-index: 3;
+
+        my style - functional, but not "professional"
+    } */
+
+    .hero__content { /*Polished way to control layer - btn becomes visible*/
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero__pattern--right,
+    .hero__pattern--left {
+        display: none;
+    }
+
+    .feature {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .cta__wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta__card {
+       transform: translate(0, -2rem);
+        max-width: 100%;
+        width: 100%;
+
+        align-items: center;
+        text-align: center;
+    }
+
+    .card__image {
+        display: none;
+    }
+
+    .cta__card h2 {
+        text-align: center;
+    }
+
+    .cta__card p {
+        text-align: center;
+    }
+
+    .cta__card button {
+        margin-left: 10px;
+    }
+}
