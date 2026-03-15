@@ -328,7 +328,7 @@ body {
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 600px) {
     .hero {
         height: 32rem;
     }
