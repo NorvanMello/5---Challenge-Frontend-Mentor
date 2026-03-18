@@ -26,7 +26,7 @@ body {
     margin: 0;
     background: var(--color-white);
     color: var(--color-purple-900);
-    font-family: 'Manrope', serif;
+    font-family: 'Manrope', sans-serif;
     overflow-x: hidden;
 }
 
@@ -48,7 +48,7 @@ body {
     transform: translateX(-50%);
 
     width: 140%;
-    height: 240px;
+    height: 15rem;
 
     background: var(--color-purple-900);  /* <-- purple, not white */
     border-radius: 50%;
@@ -97,7 +97,7 @@ header {
 }
 
 .hero__title {
-    font-family: 'Fraunces', serif;
+    font-family: 'Fraunces', sans-serif;
     font-size: 56px;
     font-weight: 600;
     max-width: 12ch;
@@ -233,7 +233,7 @@ header {
 } */
 
 .feature__title {
-    font-family: 'Fraunces', serif;
+    font-family: 'Fraunces', sans-serif;
     font-weight: 600;
     font-size: 30px;
 }
@@ -279,6 +279,7 @@ header {
     flex-direction: column;
     gap: 1rem;
     align-items: flex-start;
+    margin-bottom: 15rem;
 }
 
 .cta__card button {
@@ -288,7 +289,7 @@ header {
 .cta__card h2 {
     font-weight: 500;
     font-size: 30px;
-    font-family: 'Fraunces';
+    font-family: 'Fraunces', sans-serif;
 }
 
 .cta__card h2,
@@ -303,7 +304,7 @@ header {
 .card__image {
     display: flex;
     position: absolute;
-    right: 32px;
+    right: 3rem;
     bottom: -60px;
     pointer-events: none;
 }
@@ -321,7 +322,7 @@ header {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
     .container {
         padding: 0 2rem;
     }
@@ -423,6 +424,10 @@ header {
         gap: 1rem;
     }
 
+    .feature__list li::before {
+        align-self: center;
+    }
+
     .cta__wrapper {
         flex-direction: column;
         align-items: center;
@@ -453,3 +458,124 @@ header {
         margin-left: 10px;
     }
 }
+
+/* 
+Important Advices
+
+Use em or rem units in media queries to respect user font-size preferences and ensure better accessibility.
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 2rem;
+
+How to fix this issue
+What's the issue?
+Your media query uses pixels (@media (max-width: 768px)) instead of relative units like em or rem. This was flagged because media queries tied to absolute pixel values ignore user font-size settings and can break layout scaling for people who increase default text size for readability. Using em/rem ties breakpoints to the effective font size, making responsive behavior respect user preferences.
+
+Why does this matter?
+Real users may increase their browser/default font size for better readability. Pixel-based breakpoints can trigger layouts too early or too late for those users, producing cramped or broken interfaces and harming accessibility. For professional projects and portfolios, using relative breakpoints shows attention to inclusive, resilient design—something employers notice.
+
+How to fix it
+Convert pixel breakpoints to em or rem. A common approach is to base 1rem on the browser default (usually 16px). So 768px becomes 48rem if you interpret 1rem = 16px (768 / 16 = 48). Prefer em inside media queries if you want them to adapt to the font-size of the root or the element context; rem anchors to root font-size.
+
+Before (problematic):
+
+/* Pixel-based breakpoint (ignores user font scaling) */
+/*@media (max-width: 768px) {
+  .container {
+    padding: 0 2rem; /* this line is fine — padding uses rem already */
+/*  }
+}
+After (fixed using rem, assuming 1rem = 16px):
+
+/* Use rem so the breakpoint scales with root font size */
+/*@media (max-width: 48rem) { /* 768px / 16 = 48rem */
+/*  .container {
+    padding: 0 2rem; /* layout still uses rems for consistency */
+/*  }
+}
+Or using em (if you want the breakpoint to follow the element's computed font-size):
+
+/* Using em ties the breakpoint to the computed font-size in the document */
+/*@media (max-width: 48em) { /* same numeric value when 1em == 16px at root */
+/*  .container {
+    padding: 0 2rem;
+  }
+}
+Notes:
+
+If your project changes root font-size (e.g., html { font-size: 62.5%; }), recalc the conversion accordingly.
+Keep media query values DRY by using CSS custom properties or a preprocessing step if you have many breakpoints.
+Best practice tip
+Define your breakpoints in one place (CSS custom properties, Sass variables, or a design tokens file) and use rem/em consistently so layouts scale with user settings and maintain predictable behavior.
+
+TLDR
+Switch pixel-based media queries to em/rem (e.g., 768px → 48rem) so responsive breakpoints respect user font-size preferences and improve accessibility.
+
+Next steps
+Update your CSS with rem/em breakpoints, test by changing browser/OS font sizes or zoom to verify layout adapts, commit and push the change to GitHub, then generate a new solution report. Iterating like this strengthens both your project and your accessibility skills—ask the community if you want feedback on breakpoint strategy or token organization.
+
+***********************************************************************************************************************************************************
+***********************************************************************************************************************************************************
+***********************************************************************************************************************************************************
+@media (max-width: 768px) {
+    .container {
+        padding: 0 2rem;
+
+What's the issue?
+Your stylesheet uses an absolute unit for a size: height: 240px. The warning suggests using relative units (like rem or em) instead of absolute units (px, pt) so the layout can scale with user settings and device contexts. This ties into responsive design and accessible sizing practices.
+
+Why does this matter?
+Absolute pixels prevent interfaces from scaling when users change default font sizes (for accessibility) or when resized across devices, which can break layout, cause clipping, or make content unreadable. Using relative units makes your component behavior predictable across different zoom levels, user preferences, and root font-size adjustments — a skill employers look for in production-ready front-end work.
+
+How to fix it
+Convert the absolute pixel value to a relative unit. Common choices:
+
+rem — scales from the root (html) font-size, good for consistent global scaling.
+em — scales from the current element’s font-size, useful for components that should scale with their context. Example assuming the browser default of 16px (240 / 16 = 15):
+Before:
+
+/* Problem: fixed height in pixels prevents scaling */
+/* .card {
+  height: 240px;
+}
+After (use rem): */
+
+/* Better: size scales with root font-size (16px by default) */
+/* .card { */
+/*  height: 15rem; /* 240px / 16 = 15rem */
+/* }
+Alternative using em (component-relative): */
+
+/* If .card has a different base font-size, use em to scale with it */
+/*.card {
+  font-size: 1rem;    /* establish base for this component */
+/*  height: 15em;       /* scales with .card's font-size */
+/* }
+If the element is vertically variable or should adapt to content, consider flexible options: */
+
+/* Prefer content-driven sizing when possible */
+/*.card {
+  min-height: 15rem;  /* ensures enough space but allows growth */
+/*  height: auto;       /* lets content determine final size */
+/*}
+Include a comment or documentation if your project uses a different root font-size:
+
+/* Note: project root font-size set to 10px for a 1rem = 10px scale */
+/*html { font-size: 62.5%; } /* 62.5% of 16px ≈ 10px */
+/*.card { height: 24rem; /* 24 * 10px = 240px */ /*}
+/*Best practice tip
+Establish a consistent scale (design tokens or CSS custom properties) and use rem for layout spacing so the entire UI respects user font-size settings and is easy to adjust globally.
+
+TLDR
+Replace height: 240px with a relative unit like height: 15rem so the component scales with user settings and supports accessible, responsive layouts.
+
+Next steps
+Update the CSS in your project, test by changing your browser's default font size and different viewport sizes to confirm behavior, commit and push to GitHub, then generate a new Frontend Mentor solution report. Iteration is how you learn — ask the community if you want feedback on choosing rem vs em or setting a design scale.
+
+***********************************************************************************************************************************************************
+***********************************************************************************************************************************************************
+***********************************************************************************************************************************************************
+
+
+*/
